@@ -56,7 +56,8 @@ class Trip(models.Model):
         return self.name
 
 
-
-
+class TripLocation(models.Model):
+    trip_id= models.ForeignKey(Trip, null=False, blank=False, on_delete=models.CASCADE)
+    location_id = models.ForeignKey(Location, null=False, blank=False, on_delete=models.CASCADE)
     
     

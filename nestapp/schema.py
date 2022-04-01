@@ -44,7 +44,6 @@ class LocationInput(graphene.InputObjectType):
     created_by= graphene.String()
     
     
-    
 class CreateTrips(graphene.Mutation):
     class Arguments:
         input = TripInput(required=True)
@@ -73,9 +72,23 @@ class CreateTrips(graphene.Mutation):
 class CreateLocation(graphene.Mutation):
     class Arguments:
         input = LocationInput(required=True)
+    
+    location = graphene.Field(LocationType)
+    
+    @classmethod
+    def mutate(cls, root, info, input):
+        location = Location()
+        location.name = input.name
+        location.county = input.county
+        location.description = input.description
+        location.created_by = input.created_by
+        location.save()
+        
+        return CreateLocation(location=location)
         
 class Mutation(graphene.ObjectType):
     create_trip = CreateTrips.Field()
+    create_location = CreateLocation.Field()
     
     
 schema = graphene.Schema(query=Query, mutation=Mutation)
