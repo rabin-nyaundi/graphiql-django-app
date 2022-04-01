@@ -24,5 +24,6 @@ else
 
     echo "Pushing code to github!!!"
     git push -u origin $branch
+fi
 
 
