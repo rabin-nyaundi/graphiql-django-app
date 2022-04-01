@@ -16,7 +16,7 @@ echo $branch
 
 git commit -m "${message}"
 
-if [ -n "$(git status - porcelain)" ];
+if [-n "$(git status - porcelain)" ];
 then
     echo "Its clean, all changes committed"
 else
